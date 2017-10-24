@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <title>Fortune Teller</title>
+ 
+ 
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+ 
+ 
+</head>
+ 
+<body>
+ 
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Home</a>
+                    </li>
+                    <li role="presentation"><a href="#">&nbsp; &nbsp; Donate</a>
+                    </li>
+                    <li role="presentation"><a href="showSignUp">&nbsp; &nbsp; Donate even more</a>
+                    </li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Get Your Fortune Told</h3>
+        </div>
+ 
+        <div class="jumbotron">
+			<h3>{% print get_fortune().decode('utf-8') %}</h3>
+            
+            <p class="lead"></p>
+            <p><a class="btn btn-lg btn-success" href="/" role="button">Tell Me More</a>
+            </p>
+        </div>
+        
+		<!--
+        <div class="row marketing">
+            <div class="col-lg-6">
+                <h4>Bucket List</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+ 
+            <div class="col-lg-6">
+                <h4>Bucket List</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+ 
+                <h4>Bucket List</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+        </div>
+		-->
+ 
+        <footer class="footer">
+            <p>&copy; RaaS 2017</p>
+        </footer>
+ 
+    </div>
+</body>
+ 
+</html>
