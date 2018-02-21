@@ -1,0 +1,6 @@
+/usr/local/share/venvs/flask-web-fortune/bin/python		--	gen_context(system_u:object_r:web-fortune_exec_t,s0)
+/usr/local/share/applications/web-fortune(/.*)?			--	gen_context(system_u:object_r:web-fortune_wd_t,s0)
+/usr/local/share/applications/web-fortune/templates(/.*)?	--	gen_context(system_u:object_r:web-fortune_wd_t,s0)
+/usr/local/share/venvs/flask-web-fortune(/.*)?			--	gen_context(system_u:object_r:web-fortune_wd_t,s0)
+
+

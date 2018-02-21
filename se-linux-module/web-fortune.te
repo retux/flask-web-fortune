@@ -1,0 +1,89 @@
+policy_module(web-fortune, 1.0.12)
+
+require {
+        type commplex_main_port_t;
+        type net_conf_t;
+        type ldconfig_exec_t;
+        type bin_t;
+        type proc_t;
+        type node_t;
+        type shell_exec_t;
+        type web-fortune_t;
+        type cert_t;
+        type usr_t;
+        type lib_t;
+        type user_home_dir_t;
+        class tcp_socket { accept bind name_bind node_bind shutdown };
+        class file { execute execute_no_trans getattr open read };
+}
+
+
+########################################
+#
+# Declarations
+#
+
+type web-fortune_t;
+type web-fortune_exec_t;
+init_daemon_domain(web-fortune_t, web-fortune_exec_t)
+
+# Permissive mode is for testing and tunning module policy.
+#permissive web-fortune_t;
+
+## BOF Added by debugging (it was a hard work!)
+# Define a type for directory
+type web-fortune_wd_t;
+files_type(web-fortune_wd_t)
+
+allow web-fortune_t web-fortune_wd_t:dir list_dir_perms;
+
+read_files_pattern(web-fortune_t,web-fortune_wd_t,web-fortune_wd_t)
+# use defined macro that allows modules to be executed
+can_exec(web-fortune_t,web-fortune_wd_t)
+
+# allow extra networking capabilities
+allow web-fortune_t self:tcp_socket { getattr listen };
+allow web-fortune_t self:udp_socket { create ioctl };
+
+#============= web-fortune_t ==============
+# Added from audit2allow audit2allow -a -l -M new-module-name
+
+#!!!! WARNING: 'bin_t' is a base type.
+allow web-fortune_t bin_t:file execute;
+allow web-fortune_t lib_t:file { execute open read getattr };
+allow web-fortune_t usr_t:file { execute open read getattr };
+
+
+allow web-fortune_t commplex_main_port_t:tcp_socket name_bind;
+allow web-fortune_t ldconfig_exec_t:file { execute execute_no_trans open read };
+allow web-fortune_t net_conf_t:file { getattr open read };
+allow web-fortune_t node_t:tcp_socket node_bind;
+allow web-fortune_t proc_t:file { getattr open read };
+allow web-fortune_t self:tcp_socket { accept bind shutdown };
+allow web-fortune_t cert_t:dir search;
+allow web-fortune_t self:tcp_socket create;
+allow web-fortune_t self:tcp_socket setopt;
+#!!!! WARNING: 'shell_exec_t' is a base type.
+allow web-fortune_t shell_exec_t:file { execute execute_no_trans };
+allow web-fortune_t user_home_dir_t:dir search;
+
+# EOF suggested audit2allow
+libs_use_ld_so(web-fortune_t,web-fortune_exec_t)
+libs_use_shared_libs(web-fortune_t,web-fortune_exec_t)
+########################################
+#
+# web-fortune local policy
+#
+allow web-fortune_t self:fifo_file rw_fifo_file_perms;
+allow web-fortune_t self:unix_stream_socket create_stream_socket_perms;
+
+domain_use_interactive_fds(web-fortune_t)
+
+files_read_etc_files(web-fortune_t)
+
+miscfiles_read_localization(web-fortune_t)
+
+
+### Para probar
+
+

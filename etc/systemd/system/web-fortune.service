@@ -1,0 +1,10 @@
+[Unit]
+Description=web fortune app
+After=network.target 
+
+[Service]
+WorkingDirectory=/usr/local/share/applications/web-fortune
+ExecStart=/home/rtxapps/.venvs/flask-web-fortune/bin/python /usr/local/share/applications/web-fortune/app.py
+Type=idle
+User=rtxapps
+

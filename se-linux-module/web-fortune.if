@@ -1,0 +1,40 @@
+
+## <summary>policy for web-fortune</summary>
+
+########################################
+## <summary>
+##	Execute web-fortune_exec_t in the web-fortune domain.
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`web-fortune_domtrans',`
+	gen_require(`
+		type web-fortune_t, web-fortune_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, web-fortune_exec_t, web-fortune_t)
+')
+
+######################################
+## <summary>
+##	Execute web-fortune in the caller domain.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`web-fortune_exec',`
+	gen_require(`
+		type web-fortune_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	can_exec($1, web-fortune_exec_t)
+')
